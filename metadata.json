@@ -1,0 +1,5 @@
+{
+  "name": "SmartEarning",
+  "description": "A full-stack referral-based earnings and wallet management system. It allows users to register, invest in plans, earn commissions through referrals, and withdraw their earnings. Admins manage commissions, wallets, plans, and system settings.",
+  "requestFramePermissions": []
+}
