@@ -84,7 +84,8 @@ const PlanManagement: FC = () => {
 
     if (loading) return <Spinner />;
 
-    const columns = [
+    // FIX: Explicitly type the columns array to match the Table component's expected props.
+    const columns: { header: string; accessor: keyof Plan | ((item: Plan) => ReactNode) }[] = [
         { header: 'ID', accessor: 'id' },
         { header: 'Title', accessor: 'title' },
         { header: 'Price', accessor: (p: Plan) => `$${p.price.toFixed(2)}` },
@@ -134,14 +135,16 @@ const RequestManagement: FC<{ type: 'deposit' | 'withdrawal' }> = ({ type }) => 
 
     if (loading) return <Spinner />;
 
-    const columns = [
+    type RequestType = DepositRequest | WithdrawalRequest;
+
+    const columns: { header: string, accessor: keyof RequestType | ((item: RequestType) => ReactNode) }[] = [
         { header: 'ID', accessor: 'id' },
         { header: 'User ID', accessor: 'userId' },
-        { header: 'Amount', accessor: (r: any) => `$${r.amount.toFixed(2)}` },
+        { header: 'Amount', accessor: (r: RequestType) => `$${r.amount.toFixed(2)}` },
         { header: 'Method', accessor: 'method' },
         { header: 'Status', accessor: 'status' },
-        { header: 'Date', accessor: (r: any) => new Date(r.createdAt).toLocaleString() },
-        { header: 'Actions', accessor: (r: any) => r.status === Status.PENDING ? (
+        { header: 'Date', accessor: (r: RequestType) => new Date(r.createdAt).toLocaleString() },
+        { header: 'Actions', accessor: (r: RequestType) => r.status === Status.PENDING ? (
             <div className="space-x-2">
                 <Button size="sm" variant="primary" onClick={() => handleAction('approve', r.id)}>Approve</Button>
                 <Button size="sm" variant="danger" onClick={() => handleAction('reject', r.id)}>Reject</Button>
@@ -152,7 +155,7 @@ const RequestManagement: FC<{ type: 'deposit' | 'withdrawal' }> = ({ type }) => 
     return (
          <div>
             <Button className="mb-4" onClick={() => exportToCsv(requests, `${type}-requests.csv`)}>Export {type}s</Button>
-            <Table columns={columns} data={requests} />
+            <Table<RequestType> columns={columns} data={requests} />
         </div>
     );
 };

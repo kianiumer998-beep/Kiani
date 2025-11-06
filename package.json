@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react-dom": "19.2.0",
-    "react": "19.2.0",
-    "@headlessui/react": "2.1.2",
-    "react-router-dom": "6.25.1"
+    "react": "^19.2.0",
+    "@headlessui/react": "1.7.17",
+    "react-router-dom": "6.24.1",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
