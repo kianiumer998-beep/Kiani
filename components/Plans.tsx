@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { api } from '../services/api';
 import { useAuth } from '../App';
 import { Plan } from '../types';

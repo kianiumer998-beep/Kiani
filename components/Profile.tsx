@@ -1,4 +1,4 @@
-import { useState, type FC, type ChangeEvent, type FormEvent } from 'react';
+import { useState, FC, ChangeEvent, FormEvent } from 'react';
 import { api } from '../services/api';
 import { useAuth } from '../App';
 import { User } from '../types';

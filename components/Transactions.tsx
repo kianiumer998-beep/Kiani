@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC, type ReactNode } from 'react';
+import { useState, useEffect, FC, ReactNode } from 'react';
 import { api } from '../services/api';
 import { useAuth } from '../App';
 import { Transaction, TransactionType } from '../types';
@@ -32,7 +32,6 @@ const TransactionsPage: FC = () => {
 
     const filteredTransactions = transactions.filter(t => filter === 'ALL' || t.type === filter);
 
-    // FIX: Add explicit type annotation to 'columns' to match Table component props.
     const columns: { header: string; accessor: keyof Transaction | ((item: Transaction) => ReactNode) }[] = [
         { header: 'Date', accessor: (t: Transaction) => new Date(t.createdAt).toLocaleString() },
         { header: 'Type', accessor: 'type' },

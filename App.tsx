@@ -1,10 +1,12 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { HashRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { User, Role } from './types';
 import { api } from './services/api';
-import AuthPage from './components/Auth';
+// FIX: Added .tsx extension to fix module resolution errors.
+import AuthPage from './components/Auth.tsx';
 import DashboardPage from './components/Dashboard';
-import AdminPanel from './components/AdminPanel';
+// FIX: Added .tsx extension to fix module resolution errors.
+import AdminPanel from './components/AdminPanel.tsx';
 import PlansPage from './components/Plans';
 import CommissionsPage from './components/Commissions';
 import TransactionsPage from './components/Transactions';
@@ -78,7 +80,6 @@ const ProtectedRoute = ({ children, adminOnly = false }: { children: ReactNode; 
 };
 
 // Layout Component
-// FIX: Changed component to accept 'label' prop instead of 'children' to fix props type error.
 const NavItem = ({ to, icon, label }: { to: string; icon: ReactNode; label: ReactNode }) => {
     const location = useLocation();
     const isActive = location.pathname === to || (to !== '/dashboard' && location.pathname.startsWith(to));
@@ -94,7 +95,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
     const { user, logout } = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    // FIX: Add explicit type annotation to userLinks to fix type inference issue.
     const userLinks: { to: string; icon: ReactNode; label: string }[] = [
       { to: '/dashboard', icon: <DashboardIcon className="h-5 w-5" />, label: 'Dashboard' },
       { to: '/dashboard/plans', icon: <PlanIcon className="h-5 w-5" />, label: 'Buy Plans' },
@@ -115,7 +115,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
               <span className="ml-2 text-2xl font-bold">SmartEarning</span>
           </div>
           <nav className="flex-1 px-4 py-6 space-y-2">
-            {/* FIX: Pass 'label' prop to NavItem instead of children. */}
             {userLinks.map(link => <NavItem key={link.to} to={link.to} icon={link.icon} label={link.label} />)}
           </nav>
           <div className="px-4 py-4 border-t border-gray-700">
@@ -182,37 +181,33 @@ const App = () => {
     <AuthProvider>
       <HashRouter>
         <Routes>
-          {/* FIX: Replaced self-closing Route tag with explicit closing tag to fix children-related errors. */}
-          <Route path="/auth" element={<AuthPage />}></Route>
-          {/* FIX: Replaced self-closing Route tag with explicit closing tag to fix children-related errors. */}
-          <Route path="/" element={<Navigate to="/dashboard" />}></Route>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           
-          {/* FIX: Replaced self-closing Route tag with explicit closing tag to fix children-related errors. */}
           <Route path="/dashboard/*" element={
             <ProtectedRoute>
               <Layout>
                 <Routes>
-                  <Route index element={<DashboardPage />}></Route>
-                  <Route path="plans" element={<PlansPage />}></Route>
-                  <Route path="commissions" element={<CommissionsPage />}></Route>
-                  <Route path="transactions" element={<TransactionsPage />}></Route>
-                  <Route path="referrals" element={<ReferralsPage />}></Route>
-                  <Route path="profile" element={<ProfilePage />}></Route>
+                  <Route index element={<DashboardPage />} />
+                  <Route path="plans" element={<PlansPage />} />
+                  <Route path="commissions" element={<CommissionsPage />} />
+                  <Route path="transactions" element={<TransactionsPage />} />
+                  <Route path="referrals" element={<ReferralsPage />} />
+                  <Route path="profile" element={<ProfilePage />} />
                 </Routes>
               </Layout>
             </ProtectedRoute>
-          }></Route>
+          } />
 
-          {/* FIX: Replaced self-closing Route tag with explicit closing tag to fix children-related errors. */}
           <Route path="/admin/*" element={
             <ProtectedRoute adminOnly={true}>
               <Layout>
                  <Routes>
-                    <Route index element={<AdminPanel />}></Route>
+                    <Route index element={<AdminPanel />} />
                  </Routes>
               </Layout>
             </ProtectedRoute>
-          }></Route>
+          } />
 
         </Routes>
       </HashRouter>

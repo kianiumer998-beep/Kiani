@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC, type ReactNode } from 'react';
+import { useState, useEffect, FC, ReactNode } from 'react';
 import { api } from '../services/api';
 import { useAuth } from '../App';
 import { Commission } from '../types';
@@ -31,7 +31,6 @@ const CommissionsPage: FC = () => {
     if (loading) return <div className="flex justify-center items-center h-full"><Spinner size="lg" /></div>;
     if (error) return <div className="text-red-500 text-center">{error}</div>;
 
-    // FIX: Add explicit type annotation to 'columns' to match Table component props.
     const columns: { header: string; accessor: keyof Commission | ((item: Commission) => ReactNode) }[] = [
         { header: 'Date', accessor: (c: Commission) => new Date(c.createdAt).toLocaleString() },
         { header: 'From User ID', accessor: 'fromUserId' },

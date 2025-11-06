@@ -1,4 +1,12 @@
-import { forwardRef, useState, Fragment, type ReactNode, type FC, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
+import {
+  FC,
+  useState,
+  forwardRef,
+  Fragment,
+  ReactNode,
+  ButtonHTMLAttributes,
+  InputHTMLAttributes,
+} from 'react';
 import { Transition } from '@headlessui/react';
 
 // Card
