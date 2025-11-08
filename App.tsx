@@ -1,17 +1,16 @@
+
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { HashRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { User, Role } from './types';
 import { api } from './services/api';
-// FIX: Added .tsx extension to fix module resolution errors.
 import AuthPage from './components/Auth.tsx';
-import DashboardPage from './components/Dashboard';
-// FIX: Added .tsx extension to fix module resolution errors.
+import DashboardPage from './components/Dashboard.tsx';
 import AdminPanel from './components/AdminPanel.tsx';
-import PlansPage from './components/Plans';
-import CommissionsPage from './components/Commissions';
-import TransactionsPage from './components/Transactions';
-import ReferralsPage from './components/Referrals';
-import ProfilePage from './components/Profile';
+import PlansPage from './components/Plans.tsx';
+import CommissionsPage from './components/Commissions.tsx';
+import TransactionsPage from './components/Transactions.tsx';
+import ReferralsPage from './components/Referrals.tsx';
+import ProfilePage from './components/Profile.tsx';
 import { Spinner } from './components/ui';
 import { DashboardIcon, UsersIcon, LogoutIcon, CommissionIcon, PlanIcon, TransactionIcon, ReferralIcon, ProfileIcon, SettingsIcon, WalletIcon } from './components/Icons';
 
